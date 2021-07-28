@@ -1,4 +1,4 @@
-t
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +6,14 @@ t
 <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
 <script>
 function start(){
-sjs.open();
-var gameover_text = new sjs.Text("GameOver!",28,"blue");
+sjs.open("target",1250,750);
+var image = new sjs.Image("Images/bruh.gif");
+image.setSize(sjs.getWidth(),sjs.getHeight());
+
+
+var gameover_text = new sjs.Text("Tisk,Tisk The Empire Won!",28,"blue");
 gameover_text.centerH().offset(0,85);
-var startBtn = new sjs.Button("Restart", function(){
+var startBtn = new sjs.Button("Retry At The battle Of Endor", function(){
 window.location = "index.html";
 });
 startBtn.center();
@@ -24,4 +28,3 @@ score_txt.setText("Score: "+localStorage.getItem("score"));
 <div id="target" style="margin:auto;background:grey;"></div>
 </body>
 </html>
-Below sjs

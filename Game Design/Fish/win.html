@@ -5,11 +5,11 @@
 <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
 <script>
 function start(){
-sjs.open();
-var image = new sjs.Image("https://s3-us-west-2.amazonaws.com/simplycoding/GameDesignVideos/Images/fireworks.gif");
-image.setSize(500, 400);
+sjs.open("target",1200,750);
+var image = new sjs.Image("Images/R.gif");
+image.setSize(1200, 750);
 
-var win_text = new sjs.Text("You Win!",28,"blue")
+var win_text = new sjs.Text("You Have Brought Hope To The Rebellion!",28,"blue")
 win_text.centerH();
 var startBtn = new sjs.Button("Play Again?", function(){
 window.location = "index.html";

@@ -1,11 +1,11 @@
 
 <html>
 <head>
-<title> Fish Game! </title>
+<title> Star Wars </title>
 <script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
 <script>
 function start(){
-sjs.open("target", 800, 500);
+sjs.open("target", 1250, 750);
 //Background Music
 var playM = new Audio('Music/NF.mp3');
 var toggle = true;
@@ -28,23 +28,23 @@ toggle = true;
 });
 var speed = 3;
 
-var background = new sjs.Image("Images/background.png");
+var background = new sjs.Image("Images/OIP.jpg");
 background.setSize(sjs.getWidth(), sjs.getHeight());
 
-var player = new sjs.Image("Images/fish_left.png");
+var player = new sjs.Image("Images/xwing.jpg");
 player.type = "player";
-player.setSize(50, 25);
+player.setSize(100,50 );
 player.friction = .1;
 player.accel = 0.5;
 player.center();
 
 sjs.keyDown(RIGHT_KEY, function(){
-	player.setImage("Images/fish_right.png");
+	player.setImage("Images/xwing.jpg");
 	player.pushRight();
 });
 
 sjs.keyDown(LEFT_KEY, function(){
-	player.setImage("Images/fish_left.png");
+	player.setImage("Images/xwing.jpg");
 	player.pushLeft();
 });
 
@@ -80,23 +80,25 @@ sjs.onHit("player","powerUp",function(x,y){
 setInterval(function(){
 	var speed = Math.floor(1 + Math.random()*10);
 	if(Math.random() > 0.5){
-		var enemy = new sjs.Image("Images/fish2_right.png");
+		var enemy = new sjs.Image("Images/R.jpg");
 		enemy.type = "enemy";
 		enemy.setSize(100,50);
 		enemy.noBounds = true;
 		enemy.friction = 0;
 		enemy.pushRight(speed);
 		enemy.scaleSize(.5 + Math.random() * 1.2)
-		enemy.moveTo();
+		enemy.moveTo(-enemy.getWidth(), Math.random()*(enemy.getClamp().y))
+
 	} else {
-		var enemy = new sjs.Image("Images/fish2_left.png");
+		var enemy = new sjs.Image("Images/R.jpg");
 		enemy.type = "enemy";
 		enemy.setSize(100,50);
 		enemy.noBounds = true;
 		enemy.friction = 0;
 		enemy.pushLeft(speed);
 		enemy.scaleSize(.5 + Math.random() * 1.2);
-		enemy.moveTo();
+		enemy.moveTo(sjs.getWidth(), Math.random()*(enemy.getClamp().y));
+
 	}//end of if else statement
 
 },1000);
@@ -124,19 +126,20 @@ localStorage.setItem("score", score);
 		x.grow(10,5);
 		if(score >= 20){
 window.location = "win.html";
-	} else {
+	} 
+}
+else {
 		x.destroy();
 	window.location = "gameover.html";
 	}
 	y.destroy();
-}
 });
                                                                                 
 }// end start	
 </script>
 </head>
 <body onload="start()">
-<h1> GO FISH </h1>
+<h1> Star wars </h1>
 
 <div id="target" style="margin:auto;background:grey;"></div>
 </body>
