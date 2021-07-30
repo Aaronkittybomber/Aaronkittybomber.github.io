@@ -1,0 +1,128 @@
+
+<html>
+<head>
+<title> Star Wars </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open("target", 1250, 750);
+//Background Music
+var playM = new Audio('Music/CB.mp3');
+var toggle = true;
+var musicOn = false;
+sjs.keyDown(SPACE_KEY, function(){
+if(toggle == true){
+if(musicOn == false){
+playM.play();
+musicOn = true;	
+} else {
+playM.pause();
+musicOn = false;
+}
+toggle = false;
+setTimeout(function(){
+toggle = true;
+},1000);
+}	
+
+
+});
+var speed = 3;
+
+var background = new sjs.Image("Images/OIP.jpg");
+background.setSize(sjs.getWidth(), sjs.getHeight());
+
+var player = new sjs.Image("Images/xwing.jpg");
+player.type = "player";
+player.setSize(100,50 );
+player.friction = .1;
+player.accel = 0.5;
+player.center();
+
+sjs.keyDown(RIGHT_KEY, function(){
+	player.setImage("Images/xwing.jpg");
+	player.pushRight();
+});
+
+sjs.keyDown(LEFT_KEY, function(){
+	player.setImage("Images/xwing.jpg");
+	player.pushLeft();
+});
+
+sjs.keyDown(UP_KEY, function(){
+	player.pushUp();
+});
+
+sjs.keyDown(DOWN_KEY, function(){
+	player.pushDown();
+});
+
+
+//Enemies
+setInterval(function(){
+	var speed = Math.floor(1 + Math.random()*10);
+	if(Math.random() > 0.5){
+		var enemy = new sjs.Image("Images/R.jpg");
+		enemy.type = "enemy";
+		enemy.setSize(100,50);
+		enemy.noBounds = true;
+		enemy.friction = 0;
+		enemy.pushRight(speed);
+		enemy.scaleSize(.5 + Math.random() * 1.2)
+		enemy.moveTo(-enemy.getWidth(), Math.random()*(enemy.getClamp().y))
+
+	} else {
+		var enemy = new sjs.Image("Images/R.jpg");
+		enemy.type = "enemy";
+		enemy.setSize(100,50);
+		enemy.noBounds = true;
+		enemy.friction = 0;
+		enemy.pushLeft(speed);
+		enemy.scaleSize(.5 + Math.random() * 1.2);
+		enemy.moveTo(sjs.getWidth(), Math.random()*(enemy.getClamp().y));
+
+	}//end of if else statement
+
+},1000);
+
+
+
+
+sjs.left_screen.offset(-500);
+sjs.right_screen.offset(500);
+//Score
+var score = 0;
+var score_txt = new sjs.Text("Score: 0", 21, "orange");
+
+
+
+sjs.onHit("enemy",["right_screen","left_screen"],function(x,y){
+	x.destroy();
+});
+
+sjs.onHit("player","enemy", function(x,y){
+	if(x.getWidth() > y.getWidth() && x.getHeight() > y.getHeight()) {
+		score = score + 1;
+score_txt.setText("Score: "+score);
+localStorage.setItem("score", score);
+		x.grow(10,5);
+		if(score >= 20){
+window.location = "win.html";
+	} 
+}
+else {
+		x.destroy();
+	window.location = "gameover.html";
+	}
+	y.destroy();
+});
+                                                                                
+}// end start	
+</script>
+</head>
+<body onload="start()">
+<h1> Star wars </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
